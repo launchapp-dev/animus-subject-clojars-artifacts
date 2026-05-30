@@ -1,0 +1,7 @@
+node_modules
+dist
+coverage
+.animus
+*.log
+.npmrc
+.DS_Store

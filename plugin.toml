@@ -1,0 +1,64 @@
+schema = "animus.plugin.v1"
+name = "animus-subject-clojars-artifacts"
+version = "0.1.0"
+plugin_kind = "subject_backend"
+description = "Clojars artifact metadata subject backend plugin for Animus"
+protocol = "stdio"
+
+[binary]
+default = "animus-subject-clojars-artifacts"
+
+[capabilities]
+streaming = false
+progress = false
+cancellation = false
+methods = [
+  "subject/list",
+  "subject/get",
+  "subject/schema",
+  "clojars.artifact/list",
+  "clojars.artifact/get",
+  "clojars.artifact/schema",
+  "health/check",
+]
+subject_kinds = ["clojars.artifact"]
+
+[[env]]
+key = "CLOJARS_BASE_URL"
+description = "Optional Clojars base URL. Defaults to https://clojars.org."
+required = false
+
+[[env]]
+key = "CLOJARS_API_URL"
+description = "Deprecated alias for CLOJARS_BASE_URL. Defaults to https://clojars.org."
+required = false
+
+[[env]]
+key = "CLOJARS_QUERY"
+description = "Artifact search query for list requests. Defaults to ring."
+required = false
+
+[[env]]
+key = "CLOJARS_PAGE"
+description = "Optional starting search results page. Defaults to 1."
+required = false
+
+[[env]]
+key = "CLOJARS_LIMIT"
+description = "Optional maximum artifact count from 1 to 100. Defaults to 24."
+required = false
+
+[[env]]
+key = "CLOJARS_GROUP"
+description = "Optional exact Clojars group filter applied after search."
+required = false
+
+[[env]]
+key = "CLOJARS_LICENSE"
+description = "Optional exact license-name filter applied after search, such as The MIT License."
+required = false
+
+[[env]]
+key = "CLOJARS_LOCAL_QUERY"
+description = "Optional local text query applied to artifact, dependency, SCM, license, user, and version fields."
+required = false
