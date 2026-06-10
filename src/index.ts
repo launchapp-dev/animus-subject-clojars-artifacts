@@ -403,7 +403,10 @@ function buildBackend(): SubjectBackend {
           subjects.push(subjectFromArtifact(filtered[i] as ClojarsArtifact, fetchedAt, meta));
           nextCursor = i + 1 < filtered.length ? formatCursor({ page, index: i + 1 }) : null;
         }
-        if (subjects.length >= limit) break;
+        if (subjects.length >= limit) {
+          if (nextCursor === null && hasNextPage(response)) nextCursor = formatCursor({ page: page + 1, index: 0 });
+          break;
+        }
         if (!hasNextPage(response)) {
           nextCursor = null;
           break;
